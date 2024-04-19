@@ -10,7 +10,17 @@
     "website": "https://github.com/OCA/social",
     "license": "AGPL-3",
     "category": "Tools",
-    "installable": True,
+    # Quatra: this module's dependency on premailer implies oletools which
+    # disagrees with oca-server-ux' pyrfc6266 on its version of pyparsing.
+    #
+    # 2024-04-17T10:26:03,611 The conflict is caused by:
+    # 2024-04-17T10:26:03,611     pyrfc6266 1.0.0 depends on pyparsing~=3.0.7
+    # 2024-04-17T10:26:03,611     oletools 0.60.1 depends on pyparsing<3 and >=2.1.0
+    #
+    # Quatra change start
+    # "installable": True,
+    "installable": False,
+    # Quatra change end
     "external_dependencies": {"python": ["premailer"]},
     "depends": ["email_template_qweb"],
     "demo": ["demo/demo_template.xml", "demo/demo_mail_template.xml"],
