@@ -7,6 +7,16 @@
         owl="1"
     >
         <xpath
+            expr="//a[hasclass('o_ActivityMenuView_dropdownToggle')]"
+            position="replace"
+        >
+            <a class="o_ActivityMenuView_dropdownToggle dropdown-toggle o-no-caret o-dropdown--narrow" t-att-aria-expanded="activityMenuView.isOpen ? 'true' : 'false'" title="Activities" href="#" role="button" t-on-click="activityMenuView.onClickDropdownToggle">
+                <i class="fa fa-lg fa-clock-o" role="img" aria-label="Activities"/>
+                <span t-if="activityMenuView.counter > 0" class="o_ActivityMenuView_counter badge" t-esc="activityMenuView.counter"/>
+                <span t-if="activityMenuView.teamCounter > 0" class="o_ActivityMenuView_counter badge"> /<t t-esc="activityMenuView.teamCounter"/></span>
+            </a>
+        </xpath>
+        <xpath
             expr="//div[hasclass('o_ActivityMenuView_activityGroups')]"
             position="before"
         >

@@ -13,6 +13,9 @@ registerPatch({
         isTeamActive: attr({
             default: false,
         }),
+        teamCounter: attr({
+            default: 0,
+        }),
     },
     recordMethods: {
         close() {
@@ -47,9 +50,7 @@ registerPatch({
          */
         async fetchData() {
             const _super = this._super.bind(this);
-            if (!this.isTeamActive) {
-                return _super();
-            }
+            //-- fetch data Team Activities
             const context = _.extend({}, session.user_context, {team_activities: true});
             const data = await this.messaging.rpc({
                 model: "res.users",
@@ -63,6 +64,12 @@ registerPatch({
                 ),
                 extraCount: 0,
             });
+            //-- store counter Team Activities
+            this.update({teamCounter: this.counter});
+            //-- fetch data My Activities
+            if (!this.isTeamActive) {
+                return _super();
+            }
         },
     },
 });
